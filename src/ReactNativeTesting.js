@@ -1,21 +1,33 @@
 import React from "react";
-import { render } from "react-dom";
+import {
+  View,
+  Button,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Switch
+} from "react-native";
 
-const styles = {
-  fontfamily: "sans-serif",
-  textAlign: "center"
-};
+const styles = StyleSheet.create({
+  todoContainer: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  appContainer: {
+    flex: 1,
+    paddingTop: 50
+  },
+  fill: {
+    flex: 1
+  }
+});
 
 const Todo = props => (
-  <li>
-    <input
-      type="checkbox"
-      checked={props.todo.checked}
-      onChange={props.onToggle}
-    />
-    <button onClick={props.onDelete}> delete</button>
-    <span>{props.todo.text}</span>
-  </li>
+  <View style={styles.todoContainer}>
+    <Switch onValueChange={props.onToggle} value={props.todo.checked} />
+    <Button onPress={props.onDelete} title="delete" />
+    <Text>{props.todo.text}</Text>
+  </View>
 );
 
 let id = 0;
@@ -29,9 +41,10 @@ export default class ReactNativeTesting extends React.Component {
   }
 
   addTodo() {
-    const text = prompt("Enter the text");
+    id++;
+    const text = `Todo number ${id}`;
     this.setState({
-      todos: [...this.state.todos, { id: id++, text: text, checked: false }]
+      todos: [...this.state.todos, { id: id, text: text, checked: false }]
     });
   }
 
@@ -56,16 +69,14 @@ export default class ReactNativeTesting extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>This is a class Heading </h2>
-        <div> Total todos : {this.state.todos.length} </div>
-        <div>
-          {" "}
-          Unchecked todo count:{" "}
+      <View style={[styles.appContainer, styles.fill]}>
+        <Text> Total todos : {this.state.todos.length} </Text>
+        <Text>
+          Unchecked todo count:
           {this.state.todos.filter(todo => todo.checked === false).length}
-        </div>
-        <button onClick={() => this.addTodo()}>Add Todo</button>
-        <ul>
+        </Text>
+        <Button onPress={() => this.addTodo()} title="add Todos" />
+        <ScrollView>
           {this.state.todos.map(todo => (
             <Todo
               onDelete={() => this.deleteTodo(todo.id)}
@@ -73,8 +84,8 @@ export default class ReactNativeTesting extends React.Component {
               todo={todo}
             />
           ))}
-        </ul>
-      </div>
+        </ScrollView>
+      </View>
     );
   }
 }
