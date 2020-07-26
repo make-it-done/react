@@ -6,6 +6,7 @@ import App from "./App";
 import MethodReactTesting from "./methodReactTesting";
 import ClassReactTesting from "./classReactTesting";
 import ReactNativeTesting from "./ReactNativeTesting";
+import LifeCycleTesting from "./LifeCycleTesting";
 
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(
@@ -21,5 +22,8 @@ import ReactNativeTesting from "./ReactNativeTesting";
 //const classReactTesting = document.getElementById("classReactTesting");
 //render(<ClassReactTesting />, classReactTesting);
 
-const reactNativeTesting = document.getElementById("ReactNativeTesting");
-render(<ReactNativeTesting />, reactNativeTesting);
+// const reactNativeTesting = document.getElementById("ReactNativeTesting");
+// render(<ReactNativeTesting />, reactNativeTesting);
+
+const lifeCycleTesting = document.getElementById("LifeCycleTesting");
+render(<LifeCycleTesting />, lifeCycleTesting);
